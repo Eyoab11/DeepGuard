@@ -5,5 +5,5 @@ This repository contains a Jupyter Notebook (`DeepGuard.ipynb`) for preprocessin
 ## Setup
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/deepguard.git
+   git clone https://github.com/Eyoab11/deepguard.git
    cd deepguard
