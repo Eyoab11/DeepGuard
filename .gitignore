@@ -1,0 +1,23 @@
+# CICIDS2017 dataset
+CICIDS2017/
+*.csv  # Exclude raw CSVs; comment out if including train.csv, val.csv, test.csv
+
+# Virtual environment
+venv/
+.env/
+
+# Jupyter Notebook checkpoints and backups
+.ipynb_checkpoints/
+*_backup.ipynb
+ML_for_deepguard.ipynb_
+
+# Temporary files
+*.log
+*.pyc
+__pycache__/
+*.DS_Store
+
+# Large preprocessed files (uncomment if not using Git LFS)
+train.csv
+val.csv
+test.csv
