@@ -14,11 +14,12 @@ import json
 import requests
 
 # Configure logging
+os.makedirs('logs', exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('../logs/pipeline.log'),
+        logging.FileHandler('logs/pipeline.log'),
         logging.StreamHandler()
     ]
 )
@@ -208,7 +209,7 @@ class SnortLogHandler(FileSystemEventHandler):
 
 def main():
     # Load configuration
-    with open('../configs/pipeline_config.yaml', 'r') as f:
+    with open('configs/pipeline_config.yaml', 'r') as f:
         config = yaml.safe_load(f)
         
     # Create event handler and observer
