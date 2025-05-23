@@ -1,0 +1,47 @@
+# Pipeline Configuration
+
+# Snort Configuration
+snort_log_path: "C:/Snort/log"  # Update this path according to your Snort installation
+log_pattern: "*.log"
+
+# Model Configuration
+model_path: "../models/lstm/saved_models/latest.h5"
+model_type: "lstm"  # Options: lstm, dnn, random_forest
+threshold: 0.85     # Detection threshold for anomaly detection
+
+# Feature Engineering
+features:
+  - source_ip
+  - destination_ip
+  - source_port
+  - destination_port
+  - protocol
+  - payload_length
+  - flags
+  - timestamp
+
+# Preprocessing
+preprocessing:
+  normalize: true
+  remove_duplicates: true
+  time_window: 300  # Time window in seconds for aggregating events
+
+# Alert Configuration
+alerts:
+  log_file: "../logs/alerts.log"
+  severity_levels:
+    - critical
+    - high
+    - medium
+    - low
+  notification:
+    email: false
+    webhook: false
+    syslog: true
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  file: "../logs/pipeline.log"
+  max_size: 10485760  # 10MB
+  backup_count: 5 

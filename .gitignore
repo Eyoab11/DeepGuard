@@ -1,0 +1,88 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# Data files
+*.csv
+*.data
+*.h5
+*.pkl
+data/raw/*
+data/processed/*
+data/external/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+
+# Model files
+*.model
+*.h5
+*.keras
+*.joblib
+*.pkl
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# CICIDS2017 dataset
+CICIDS2017/
+*.csv  # Exclude raw CSVs; comment out if including train.csv, val.csv, test.csv
+
+# Temporary files
+*.DS_Store
+
+# Large preprocessed files (uncomment if not using Git LFS)
+train.csv
+val.csv
+test.csv
+
+UNSW/data/
+
+UNSW/multi-test.csv
+UNSW/multi-train.csv
+UNSW/multi-val.csv
+
+UNSW/label_encoder.pkl
+UNSW/test-unsw.csv
+UNSW/train-unsw.csv
+UNSW/val-unsw.csv
+
+UNSW/scaler-unsw.pkl
