@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
+env/
 build/
 develop-eggs/
 dist/
@@ -19,70 +20,65 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+venv/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-*/.ipynb_checkpoints/*
+notebooks/
 
-# Virtual Environment
-venv/
-ENV/
-env/
-
-# Data files
-*.csv
-*.data
-*.h5
-*.pkl
-data/raw/*
-data/processed/*
-data/external/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-!data/external/.gitkeep
-
-# Model files
-*.model
-*.h5
-*.keras
-*.joblib
-*.pkl
-
-# IDE
-.idea/
+# VS Code
 .vscode/
-*.swp
-*.swo
+
+# PyCharm
+.idea/
+
+# Training data and datasets (large files)
+data/raw/
+data/processed/
+data/external/
 
 # Logs
-logs/
+logs/*.log
 *.log
 
-# OS
+# Environment variables
+.env
+.env.*
+
+# Training artifacts
+training_checkpoints/
+wandb/
+tensorboard/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# OS-specific
 .DS_Store
 Thumbs.db
 
 # CICIDS2017 dataset
 CICIDS2017/
-*.csv  # Exclude raw CSVs; comment out if including train.csv, val.csv, test.csv
+*.csv  # Exclude raw CSVs
 
 # Temporary files
 *.DS_Store
 
-# Large preprocessed files (uncomment if not using Git LFS)
-train.csv
-val.csv
-test.csv
-
+# Large preprocessed files
 UNSW/data/
-
 UNSW/multi-test.csv
 UNSW/multi-train.csv
 UNSW/multi-val.csv
-
 UNSW/label_encoder.pkl
 UNSW/test-unsw.csv
 UNSW/train-unsw.csv
 UNSW/val-unsw.csv
-
 UNSW/scaler-unsw.pkl
+
+# Do NOT ignore these essential model files
+!src/models/lstm/saved_models/latest.h5
+!src/models/lstm/saved_models/scaler.pkl
+!src/models/random_forest/saved_models/model.pkl
+!src/models/random_forest/saved_models/scaler.pkl
