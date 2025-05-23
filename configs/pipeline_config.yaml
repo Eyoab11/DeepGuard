@@ -1,46 +1,97 @@
 # Pipeline Configuration
 
 # Snort Configuration
-snort_log_path: "./snort_logs"  # Test directory
+snort_log_path: "./snort_logs"  # Update this path according to your Snort installation
 log_pattern: "*.log"
 
 # Model Configuration
-model_path: "./src/models/lstm/saved_models/latest.h5"
-model_type: "lstm"  # Options: lstm, dnn, random_forest
-threshold: 0.85     # Detection threshold for anomaly detection
+models:
+  lstm:
+    path: "./src/models/lstm/saved_models/latest.h5"
+    threshold: 0.85
+    weight: 0.5  # Weight in ensemble prediction
+  random_forest:
+    path: "./src/models/random_forest/saved_models/model.pkl"
+    threshold: 0.85
+    weight: 0.5  # Weight in ensemble prediction
 
-# Feature Engineering
+# Ensemble Configuration
+ensemble:
+  method: "weighted_average"  # Options: weighted_average, maximum, minimum
+  threshold: 0.85  # Final threshold for alert generation
+
+# Feature Engineering (based on CICIDS dataset features)
 features:
-  - source_ip
-  - destination_ip
-  - source_port
-  - destination_port
-  - protocol
-  - priority
-  - timestamp
+  sequence:  # Features for LSTM
+    sequence_length: 10  # Number of packets in sequence
+    features:
+      - flow_duration
+      - flow_bytes_s
+      - flow_packets_s
+      - total_fwd_packets
+      - total_bwd_packets
+      
+  structured:  # Features for Random Forest
+    - source_ip
+    - destination_ip
+    - source_port
+    - destination_port
+    - protocol
+    - timestamp
+    - flow_duration
+    - flow_bytes_s
+    - flow_packets_s
+    - total_fwd_packets
+    - total_bwd_packets
+    - total_length_fwd_packets
+    - total_length_bwd_packets
+    - fwd_packet_length_max
+    - fwd_packet_length_min
+    - fwd_packet_length_mean
+    - bwd_packet_length_max
+    - bwd_packet_length_min
+    - bwd_packet_length_mean
+    - flow_iat_mean
+    - flow_iat_std
+    - flow_iat_max
+    - flow_iat_min
+    - fwd_iat_mean
+    - bwd_iat_mean
+    - active_mean
+    - idle_mean
 
 # Preprocessing
 preprocessing:
   normalize: true
   remove_duplicates: true
   time_window: 300  # Time window in seconds for aggregating events
+  feature_extraction:
+    flow_timeout: 120  # seconds to consider a flow complete
+    aggregate_flows: true
+    compute_statistics: true
 
 # Alert Configuration
 alerts:
   log_file: "./logs/alerts.log"
   severity_levels:
-    - critical
-    - high
-    - medium
-    - low
+    - critical    # Score > 0.9
+    - high        # Score > 0.8
+    - medium      # Score > 0.6
+    - low         # Score > 0.4
   notification:
     email: false
     webhook: false
     syslog: true
+  alert_rules:
+    ddos_threshold: 1000  # packets per second
+    bruteforce_threshold: 10  # failed attempts
+    data_exfiltration_size: 1000000  # bytes
 
 # Logging Configuration
 logging:
   level: "INFO"
   file: "./logs/pipeline.log"
   max_size: 10485760  # 10MB
-  backup_count: 5 
+  backup_count: 5
+  include_metrics: true
+  performance_monitoring: true 

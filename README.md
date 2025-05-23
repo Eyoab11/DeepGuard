@@ -2,6 +2,32 @@
 
 DeepGuard is a deep learning-based intrusion detection system that integrates with Snort logs to provide real-time threat detection and alerting.
 
+## Required Files for Integration
+
+### Essential Files (Not in Repository)
+The following files are required but not included in the repository due to size:
+
+1. Pre-trained model file:
+   ```
+   src/models/lstm/saved_models/latest.h5
+   ```
+
+2. Pre-trained scaler file:
+   ```
+   src/models/lstm/saved_models/scaler.pkl
+   ```
+
+You can obtain these files by:
+- Downloading them from our secure storage (contact maintainers)
+- OR using your own trained model and scaler (must match the expected input format)
+
+### Files Included in Repository
+- `pipeline/snort_integration.py` - Main integration code
+- `configs/pipeline_config.yaml` - Configuration file
+- All other supporting Python files
+
+**Note:** You do NOT need any of the training data, notebooks, or other git-ignored files to run the integration. The pipeline only requires the pre-trained model files mentioned above.
+
 ## System Requirements
 
 - Python 3.8 or higher
